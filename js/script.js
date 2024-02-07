@@ -12,13 +12,14 @@ Aggiungere una select accanto al bottone di generazione, che fornisca una scelta
 - con difficoltà 3 => 49 caselle, con un numero compreso tra 1 e 49, divise in 7 caselle per 7 righe;
 */
 
-// inizializzo variabili
+// inizializzo elementi HTML
 const buttonElement = document.querySelector("#play");
 const gridElement = document.querySelector("#grid");
+const selectElement = document.querySelector("#select");
 
-// creo funzione che genera 100 caselle 
-function gridGenerator() {
-    for (let i = 0; i < 100; i++) {
+// creo funzione che genera un numero diverso di caselle in base alla difficoltà scelta dall'utente
+function gridGenerator(number) {
+    for (let i = 0; i < number; i++) {
         const squareElement = document.createElement("div");
         squareElement.classList.add("square");
 
@@ -32,15 +33,41 @@ function gridGenerator() {
             console.log(this.innerText);
         })
 
+        // aggiungo lo square alla griglia
         gridElement.append(squareElement);
     }
     return gridElement;
 }
 
-// al click del bottone genero una griglia di 100 celle
+
+// al click del bottone genero una griglia N celle in base alla difficoltà
 buttonElement.addEventListener('click', function() {
 
     gridElement.innerHTML = "";
-    gridGenerator();
+    let gridSize;
+
+    // livello facile
+    if (selectElement.value == 1) {
+        gridSize = 49;
+        gridElement.classList.add("w-700");
+        gridElement.classList.remove("w-900");
+        gridElement.classList.remove("w-1000");
+
+    // livello normale 
+    } else if (selectElement.value == 2) {
+        gridSize = 81;
+        gridElement.classList.remove("w-700");
+        gridElement.classList.add("w-900");
+        gridElement.classList.remove("w-1000");
+
+    // livello difficile  
+    } else if (selectElement.value == 3) {
+        gridSize = 100;
+        gridElement.classList.remove("w-700");
+        gridElement.classList.remove("w-900");
+        gridElement.classList.add("w-1000");
+    }
+
+    gridGenerator(gridSize);
 
 })

@@ -16,18 +16,23 @@
 
 <body>
 
-    <header class="d-flex justify-content-center py-3 mb-5">
+    <header class="d-flex justify-content-center gap-2 py-3 mb-5">
+        
+        <select id="select" class="my_select form-select form-select-lg" aria-label="Large select example">
+            <option selected>Scegli Difficoltà</option>
+            <option value="1">Facile</option>
+            <option value="2">Normale</option>
+            <option value="3">Difficile</option>
+        </select>
 
         <button id="play" class="my_button btn btn-lg">Gioca!</button>
 
     </header>
 
-    <div class="container">
+    <div class="container-fluid">
 
+        <div id="grid" class="mb-5">
 
-    
-        <div id="grid" class="w-1000 mb-5">
-    
         </div>
 
     </div>
