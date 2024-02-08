@@ -15,7 +15,6 @@ Aggiungere una select accanto al bottone di generazione, che fornisca una scelta
 // inizializzo elementi HTML
 const buttonElement = document.querySelector("#play");
 const gridElement = document.querySelector("#grid");
-const selectElement = document.querySelector("#select");
 
 // creo funzione che genera un numero diverso di caselle in base alla difficoltà scelta dall'utente
 function gridGenerator(number) {
@@ -23,13 +22,22 @@ function gridGenerator(number) {
         const squareElement = document.createElement("div");
         squareElement.classList.add("square");
 
+        // in base alla grandezza della griglia cambio la grandezza degli square
+        if (number == 49) {
+            squareElement.classList.add("square-7");
+        } else if (number == 81) {
+            squareElement.classList.add("square-9");
+        } else if (number == 100) {
+            squareElement.classList.add("square-10");
+        }
+
         // all'interno di ogni square aggiungo il numero di quello square
         squareElement.innerText = i + 1;
 
         // al click il quadrato cambia colore, cliccando di nuovo torna del colore originale
         squareElement.addEventListener('click', function() {
 
-            this.classList.toggle("active");
+            this.classList.add("active");
             console.log(this.innerText);
         })
 
@@ -43,11 +51,13 @@ function gridGenerator(number) {
 // al click del bottone genero una griglia N celle in base alla difficoltà
 buttonElement.addEventListener('click', function() {
 
+    console.clear();
     gridElement.innerHTML = "";
+    const selectElement = document.querySelector("#select");
     let gridSize;
 
     // livello facile
-    if (selectElement.value == 1) {
+    if (selectElement.value == 3) {
         gridSize = 49;
         gridElement.classList.add("w-700");
         gridElement.classList.remove("w-900");
@@ -61,7 +71,7 @@ buttonElement.addEventListener('click', function() {
         gridElement.classList.remove("w-1000");
 
     // livello difficile  
-    } else if (selectElement.value == 3) {
+    } else if (selectElement.value == 1) {
         gridSize = 100;
         gridElement.classList.remove("w-700");
         gridElement.classList.remove("w-900");
